@@ -10,7 +10,7 @@
 // 50(number of molecules) divided by 2519 = 50.38
 
 //Number of Recovered: 211,606
-//Overall goal was to display a week in Febuary 2021 simulation. 
+//Overall goal was to display a week in Febuary 2021 simulation.
 
 let molecules = [];
 let grid = [];
@@ -282,24 +282,6 @@ function recoveringInfectedDead() {
 
       }
 
-      // else if (frameCount > molecule.lifetime + 200) {
-      //
-      //   console.log("week2");
-      //   let randomNum = random();
-      //   if (randomNum < 1) {
-      //
-      //     let tempObj = new Dead({
-      //       _i: molecule.index,
-      //       px: molecule.position.x,
-      //       py: molecule.position.y,
-      //       vx: molecule.velocity.x = 0,
-      //       vy: molecule.velocity.y = 0
-      //     });
-      //
-      //
-      //     molecules[molecule.index] = tempObj;
-      //   }
-      // }
 
     }
 
