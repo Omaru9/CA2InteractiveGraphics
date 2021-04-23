@@ -1,5 +1,5 @@
 let obj = {
-    numOfMolecules: 10
+    numOfMolecules: 50
     , numRows: 2
     , numCols: 2
     , showText: false
@@ -11,7 +11,7 @@ let obj = {
     , minMoleculeSize: 20
     , maxMoleculeSize: 20
     , infectRate: 0.5
-    , percentageOfInfected: 0.2
+    , percentageOfInfected: 0.3
 };
 
 var gui = new dat.gui.GUI();

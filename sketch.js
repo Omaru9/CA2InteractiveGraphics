@@ -1,7 +1,21 @@
+//Febuary 22nd 2021 Figures
+//Confirmed cases: 215,743
+//Number of dead: 4,137
+//4137 divided by 12 (number of months since covid) = 344.75 //monthly death average
+//344.75 divided 7 (weekly days) = 49.25 //weekly death average
+//50(number of molecules) divided by 49.25 = 0.985 //(rounded it to 0.1 in code)
+
+//211,606 divided by 12 (number of months since covid) = 17,633 // monthly recovered average
+//17,633 divided by 7 (weekly days) = 2,519 //weekly recovered average
+// 50(number of molecules) divided by 2519 = 50.38
+
+//Number of Recovered: 211,606
+//Overall goal was to display a week in Febuary 2021 simulation. 
+
 let molecules = [];
 let grid = [];
 let colWidth, rowHeight;
-//let checkNum = 0;
+
 
 let graphHeight = 150;
 let graphArray = [];
@@ -123,12 +137,11 @@ function checkIntersections(_collection) {
           }
         }
       }
-      //console.timeEnd();
     }
 
   }
 }
-//console.timeEnd();
+
 
 
 
@@ -216,8 +229,7 @@ function checkLoop() {
 //function that turns infected molecules to either recovered, dead or stay infected after a specific frame count
 //the forEach loops iterates through the objects in the molecules array. If the molecule is infected and if the molecules lifetime variable is less than the frameCount
 //it turns that molecule into either Recovered, Dead, or Infected by creating a new recovered/dead/infected molecule using its values.
-//A temporary object is created holding the index, x position and y position, velocity x & y values to insert the recovered/dead/or infected molecule into molecules array
-
+//A temporary object is created holding the index, x position and y position, velocity x & y values to insert the recovered/dead/infected molecule into molecules array
 function recoveringInfectedDead() {
 
   molecules.forEach((molecule) => {
@@ -232,7 +244,7 @@ function recoveringInfectedDead() {
 
         let randomNum = random();
         //recovery chance
-        if (randomNum > 0.25) {
+        if (randomNum > 0.5) {
           let tempObj = new Recovered({
             _i: molecule.index,
             px: molecule.position.x,
@@ -242,9 +254,10 @@ function recoveringInfectedDead() {
           });
 
           //console.log(tempObj);
+          //
           molecules[molecule.index] = tempObj;
 
-        } else if (randomNum > 0.7) {
+        } else if (randomNum > 0.4) {
           let tempObj = new Infected({
             _i: molecule.index,
             px: molecule.position.x,
@@ -254,7 +267,7 @@ function recoveringInfectedDead() {
           });
 
           molecules[molecule.index] = tempObj;
-        } else if (randomNum > 0.05) {
+        } else if (randomNum < 0.1) {
           let tempObj = new Dead({
             _i: molecule.index,
             px: molecule.position.x,
