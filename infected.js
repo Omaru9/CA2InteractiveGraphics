@@ -15,10 +15,10 @@ class Infected extends Molecule {
     });
 
     this.fillColor = color(255, 0, 0);
-    this.intersectingColor = color(100, 0, 0);
+    // this.intersectingColor = color(100, 0, 0);
 
-    this.lifetime = frameCount; //frameCount counts each frame of the frameRate
-
+    this.lifetime = frameCount;
+    //frameCount counts each frame of the frameRate
   }
 
 

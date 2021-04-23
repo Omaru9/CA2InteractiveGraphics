@@ -11,11 +11,7 @@ let numRecovered;
 let numDead;
 //let day = 24;
 
-let oneWeek = 168;
-
-
-
-//let chance = random(0,1);
+let oneWeek = 250;
 
 function setup() {
   createCanvas(1000, 1000);
@@ -23,7 +19,7 @@ function setup() {
   rowHeight = height / obj.numRows;
   molecules = [];
 
-//pushes molcules and their indexes values into the molecules array
+  //pushes molcules and their indexes values into the molecules array
   for (let i = 0; i < obj.numOfMolecules; i++) {
 
     let randomNum = random();
@@ -39,10 +35,7 @@ function setup() {
 
   }
 
-  //let healthObj = new Healthy(51, 'Matt');
-  //let infectedObj = molecules.push(new Infected(2, 'Matt', 2.5));
 
-  //frameRate(60);
   gridify();
   checkLoop();
 }
@@ -56,10 +49,10 @@ function draw() {
   });
 
   //calls recovered
-  recovering();
+  recoveringInfectedDead();
 
   splitObjectIntoGrid();
-  //checkIntersectionsOld();
+
   obj.gridState ? drawGrid() : null;
 
   molecules.forEach((molecule) => {
@@ -73,25 +66,6 @@ function draw() {
 
 
 }
-
-//called in the setup() instead of being called in each iteration of the splitObjectIntoGrid() function.
-//the function goes through each molecule object in the canvas and checks if the molecules are intersecting.
-function checkIntersectionsOld() {
-  //console.time();
-  for (let a = 0; a < molecules.length; a++) {
-    for (let b = a + 1; b < molecules.length; b++) {
-      let moleculeA = molecules[a];
-      let moleculeB = molecules[b];
-      if (obj.lineState) {
-        stroke(125, 100);
-        line(moleculeA.position.x, moleculeA.position.y, moleculeB.position.x, moleculeB.position.y);
-      };
-      moleculeA.isIntersecting(moleculeB) ? (moleculeA.changeColor(), moleculeB.changeColor()) : null;
-    }
-  }
-  //console.timeEnd();
-}
-
 
 
 //this function checks if molecules in a grid space is intersecting using a nested loop iterating through the elements of the moleculeCollection array.
@@ -110,10 +84,10 @@ function checkIntersections(_collection) {
       };
 
 
-//when a moleculte touches off another, isIntersecting is called from the molecule class
-//within that, moleculeA and moleculeB checks if each is infected or healthy (and vice versa)
-//if the molecule is infected and the infectRate is above a random number (to simulate chance) and it collides with a healthy molecule, a new infected molecule is created using the same values as the healthy molecule.
-//this is stored within a temporary object that is added into the array.
+      //when a moleculte touches off another, isIntersecting is called from the molecule class
+      //within that, moleculeA and moleculeB checks if each is infected or healthy (and vice versa)
+      //if the molecule is infected and the infectRate is above a random number (to simulate chance) and it collides with a healthy molecule, a new infected molecule is created using the same values as the healthy molecule.
+      //this is stored within a temporary object that is added into the array.
       if (moleculeA.isIntersecting(moleculeB)) {
 
         if (moleculeA.constructor.name == "Infected" && moleculeB.constructor.name == "Healthy") {
@@ -239,9 +213,12 @@ function checkLoop() {
 }
 
 //called from draw()
-//for each object in the molecule array, it finds infected molecules
-//
-function recovering() {
+//function that turns infected molecules to either recovered, dead or stay infected after a specific frame count
+//the forEach loops iterates through the objects in the molecules array. If the molecule is infected and if the molecules lifetime variable is less than the frameCount
+//it turns that molecule into either Recovered, Dead, or Infected by creating a new recovered/dead/infected molecule using its values.
+//A temporary object is created holding the index, x position and y position, velocity x & y values to insert the recovered/dead/or infected molecule into molecules array
+
+function recoveringInfectedDead() {
 
   molecules.forEach((molecule) => {
 
@@ -267,8 +244,7 @@ function recovering() {
           //console.log(tempObj);
           molecules[molecule.index] = tempObj;
 
-        }
-        else if (randomNum > 0.7) {
+        } else if (randomNum > 0.7) {
           let tempObj = new Infected({
             _i: molecule.index,
             px: molecule.position.x,
@@ -278,22 +254,21 @@ function recovering() {
           });
 
           molecules[molecule.index] = tempObj;
-        }
-        else if (randomNum > 0.05) {
-              let tempObj = new Dead({
-                _i: molecule.index,
-                px: molecule.position.x,
-                py: molecule.position.y,
-                vx: molecule.velocity.x = 0,
-                vy: molecule.velocity.y = 0
-              });
+        } else if (randomNum > 0.05) {
+          let tempObj = new Dead({
+            _i: molecule.index,
+            px: molecule.position.x,
+            py: molecule.position.y,
+            vx: molecule.velocity.x = 0,
+            vy: molecule.velocity.y = 0
+          });
 
 
-              molecules[molecule.index] = tempObj;
+          molecules[molecule.index] = tempObj;
         }
 
       }
-      
+
       // else if (frameCount > molecule.lifetime + 200) {
       //
       //   console.log("week2");

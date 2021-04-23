@@ -16,8 +16,8 @@ class Healthy extends Molecule {
 
 
     this.fillColor = color(0, 255, 0);
-    this.intersectingColor = color(0, 100, 0);
-    this.infectionChance = random(0, 10);
+    // this.intersectingColor = color(0, 100, 0);
+
 
 
   }

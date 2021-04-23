@@ -15,7 +15,7 @@ class Dead extends Molecule {
     });
 
     this.fillColor = color(0);
-    this.intersectingColor = color(100, 0, 0);
+    // this.intersectingColor = color(100, 0, 0);
 
 
   }

@@ -15,7 +15,7 @@ class Recovered extends Molecule {
     });
 
     this.fillColor = color(149, 200, 255);
-    this.intersectingColor = color(100, 0, 0);
+    // this.intersectingColor = color(100, 0, 0);
 
     //this.age = frameCount
   }

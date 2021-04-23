@@ -13,7 +13,7 @@ class Molecule {
     this.radius = random(obj.minMoleculeSize, obj.maxMoleculeSize);
 
     this.fillColor = color(0,0,255);
-    this.intersectingColor = color(0,0,100);
+    // this.intersectingColor = color(0,0,100);
     this.color = this.fillColor;
 
     this.index = _i;
@@ -107,16 +107,15 @@ class Molecule {
       }
 
 
-  changeColor(){
-    this.color = this.intersectingColor;
-  }
-
+  // changeColor(){
+  //   this.color = this.intersectingColor;
+  // }
+  //
   reset(){
     this.color = this.fillColor;
   }
 
   step() {
-
     (this.position.x > width - this.radius*2 || this.position.x < 0 + this.radius*2) ?
     this.velocity.x *= -1: null;
 
